@@ -76,15 +76,22 @@
   users.users.artemexex3000 = {
     isNormalUser = true;
     extraGroups = ["wheel"]; # Required for sudo
-    initialPassword = "qwerty123"; # Change later
+    initialPassword = "159753159753"; # Change later
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  # environment.systemPackages = with pkgs; [
-  #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #   wget
-  # ];
+  environment.systemPackages = with pkgs; [
+    neofetch
+    wget
+    telegram-desktop
+    git
+  ];
+
+  programs.neovim.enable = true;
+
+  programs.firefox.enable = true;
+  programs.steam.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -123,12 +130,5 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05"; # Did you read the comment?
-  
-  environment.systemPackages = with pkgs; [ 
-    git 
-  ];
-
-  programs.firefox.enable = true;
-  programs.steam.enable = true;
 }
 
