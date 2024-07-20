@@ -30,7 +30,6 @@
   # i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
-
     useXkbConfig = true; # use xkb.options in tty.
   };
 
@@ -42,6 +41,9 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
   
+  # services.tlp = {
+  #   enable = true;
+  # };
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
@@ -50,9 +52,6 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  # Enable sound.
-  # hardware.pulseaudio.enable = true;
-  # OR
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -63,19 +62,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.alice = {
-  #   isNormalUser = true;
-  #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  #   packages = with pkgs; [
-  #     firefox
-  #     tree
-  #   ];
-  # };
-
   users.users.artemexex3000 = {
     isNormalUser = true;
-    extraGroups = ["wheel"]; # Required for sudo
+    extraGroups = ["wheel" "docker"]; # Required for sudo
     initialPassword = "159753159753"; # Change later
   };
 
@@ -84,14 +73,23 @@
   environment.systemPackages = with pkgs; [
     neofetch
     wget
+    qbittorrent
     telegram-desktop
     git
+    jetbrains.phpstorm
+    docker-compose
+    prismlauncher
   ];
 
-  programs.neovim.enable = true;
+  virtualisation.docker = {
+    enable = true;
+  };
 
+  programs.neovim.enable = true;
   programs.firefox.enable = true;
   programs.steam.enable = true;
+
+  programs.ssh.startAgent = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -104,7 +102,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
