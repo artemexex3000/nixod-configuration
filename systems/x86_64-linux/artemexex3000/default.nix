@@ -73,10 +73,14 @@
   environment.systemPackages = with pkgs; [
     neofetch
     wget
+    gnumake
+    htop
     qbittorrent
+    anydesk
     telegram-desktop
     git
     jetbrains.phpstorm
+    jetbrains.idea-ultimate
     docker-compose
     prismlauncher
   ];
