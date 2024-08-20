@@ -1,6 +1,8 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-24.05";
+    };
 
     snowfall = {
       url = "github:snowfallorg/lib";
@@ -8,7 +10,7 @@
     };
   };
 
-  outputs = {snowfall, ...} @ inputs:
+  outputs = { snowfall, ... } @ inputs:
     snowfall.mkFlake {
       inherit inputs;
 

@@ -76,13 +76,16 @@
     gnumake
     htop
     qbittorrent
+    vlc
     anydesk
     telegram-desktop
     git
+    ngrok
+    postman
     jetbrains.phpstorm
-    jetbrains.idea-ultimate
     docker-compose
     prismlauncher
+    php83Packages.composer
   ];
 
   virtualisation.docker = {
@@ -92,7 +95,10 @@
   programs.neovim.enable = true;
   programs.firefox.enable = true;
   programs.steam.enable = true;
-
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
   programs.ssh.startAgent = true;
 
   # Some programs need SUID wrappers, can be configured further or are
