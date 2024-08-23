@@ -10,10 +10,6 @@
       ./hardware-configuration.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   boot.kernelPackages = pkgs.linuxPackages_xanmod_stable;
 
   networking.hostName = "artemexex3000"; # Define your hostname.
@@ -61,10 +57,10 @@
   
   hardware.pulseaudio.enable = false;
 
-  hardware.enableAllFirmware = true;
-
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
+
+  users.defaultUserShell = pkgs.nushell;
 
   users.users.artemexex3000 = {
     isNormalUser = true;
@@ -79,8 +75,11 @@
     wget
     gnumake
     htop
+    nushell
+
     qbittorrent
     vlc
+    mkvtoolnix
     anydesk
     telegram-desktop
     git
