@@ -59,8 +59,6 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
-  users.defaultUserShell = pkgs.nushell;
-
   users.users.artemexex3000 = {
     isNormalUser = true;
     extraGroups = ["wheel" "docker"];
