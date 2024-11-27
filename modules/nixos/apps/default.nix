@@ -6,6 +6,10 @@
   };
 
   environment.systemPackages = with pkgs; [
-    zig
+    zig    
   ];
+
+  #programs = {
+  #  steam.enable = true;
+  #};
 }

@@ -15,6 +15,14 @@
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 80 443 9003 ];
+    allowedUDPPortRanges = [
+      { from = 4000; to = 4007; }
+      { from = 8000; to = 8010; }
+    ];
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Kiev";
@@ -79,6 +87,16 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  systemd = {
+    packages = with pkgs; [
+      cloudflare-warp
+    ];
+
+    targets.multi-user.wants = [
+      "warp-svc.service"
+    ];
+  };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
