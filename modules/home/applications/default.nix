@@ -1,17 +1,28 @@
-{ pkgs, ... }:
-
-{
+{ pkgs, lib, ... }: let
+  wrapped-phpstorm = pkgs.symlinkJoin {
+    name = "phpstorm";
+    paths = [pkgs.jetbrains.phpstorm];
+    buildInputs = [pkgs.makeWrapper];
+    postBuild = ''
+      wrapProgram $out/bin/phpstorm \
+        --prefix PATH : ${pkgs.nodejs_22}/bin
+    '';
+  };
+in {
   home.packages = with pkgs; [
     neofetch
     wget
+    inetutils
     gnumake
     htop
+    lsof
     cloudflare-warp
 
     git
     ngrok
     ffmpeg_7-headless
     docker-compose
+    filezilla
     php83Packages.composer
     php83Extensions.xdebug
 
@@ -22,11 +33,12 @@
     mkvtoolnix
     telegram-desktop
     postman
-    jetbrains.phpstorm
+    wrapped-phpstorm
   ];
 
   programs = {
     neovim.enable = true;
+
     vscode = {
       enable = true;
       extensions = with pkgs.vscode-extensions; [
@@ -58,11 +70,14 @@
 	"rust-analyzer.inlayHints.closureCaptureHints.enable" = true;
       };
     };
+
     firefox.enable = true;
+
     direnv = {
       enable = true;
       nix-direnv.enable = true;
     };
+
     btop.enable = true;
   };
 
